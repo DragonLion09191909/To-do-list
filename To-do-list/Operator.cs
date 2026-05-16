@@ -15,7 +15,7 @@ namespace To_do_list
                 list.Add(new To_Do_List(text));
                 return text;
             }
-            else throw new Exception("Your doing is empty or too big!");
+            else throw new Exception("Your doing is empty or too big(max 100)!");
 
 
 
