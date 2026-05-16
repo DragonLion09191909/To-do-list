@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using static To_do_list.To_Do_List;
 
 namespace To_do_list
 {
@@ -17,6 +18,19 @@ namespace To_do_list
                     PrintList(op);
                     break;
                 case ConsoleKey.C:
+                    Console.Clear();
+                    Console.WriteLine("Choose index you want to change status");
+                    if (int.TryParse(Console.ReadLine(), out int inputOfIndex))
+                    {
+                        Console.WriteLine("Choose status for this doing");
+                        op.ChangeStatus(inputOfIndex, Console.ReadLine());
+                        PrintList(op);
+
+
+                    }
+
+                    else throw new Exception("This index doesn't exist!");
+
                     break;
                 case ConsoleKey.D:
                     Console.Clear();
@@ -84,5 +98,6 @@ namespace To_do_list
             Console.ReadLine();
             Console.Clear();
         }
+       
     }
 }

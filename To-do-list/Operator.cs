@@ -29,11 +29,16 @@ namespace To_do_list
         public void ChangeStatus(int index, string  status)
         {
             int input=index - 1;
-            if((input>=0 && input<list.Count) && !string.IsNullOrEmpty(status))
+            if ((input >= 0 && input < list.Count) && !string.IsNullOrEmpty(status))
             {
-               
-               
+                if (status.StartsWith("A", StringComparison.OrdinalIgnoreCase)) list[input].State = To_Do_List.Status.Active;
+                else if (status.StartsWith("D", StringComparison.OrdinalIgnoreCase)) list[input].State = To_Do_List.Status.Done;
+                else if (status.StartsWith("C", StringComparison.OrdinalIgnoreCase)) list[input].State = To_Do_List.Status.Cancelled;
+                else throw new Exception("Unknown status");
+
+
             }
+            else throw new Exception("Your input is empty");
 
         }
              
