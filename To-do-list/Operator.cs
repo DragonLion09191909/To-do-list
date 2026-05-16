@@ -20,6 +20,22 @@ namespace To_do_list
 
 
         }
+        public void DeleteInList(int index)
+        {
+            int input = index - 1;
+            if(input < list.Count && input >= 0) list.RemoveAt(input);
+
+        }
+        public void ChangeStatus(int index, string  status)
+        {
+            int input=index - 1;
+            if((input>=0 && input<list.Count) && !string.IsNullOrEmpty(status))
+            {
+               
+               
+            }
+
+        }
              
 
 

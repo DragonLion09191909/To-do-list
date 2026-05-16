@@ -10,7 +10,7 @@ namespace To_do_list
     {
      
        
-       public Status State { get ;  private set; }
+       public Status State { get ;   set; }
        
        public string Doing { get ;  private set; }
        public enum Status { Done, Cancelled, Active }
