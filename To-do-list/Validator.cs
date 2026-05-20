@@ -6,7 +6,10 @@ namespace To_do_list
 {
     internal class Validator
     {
-        public static bool Check(string text)=> text.Length > 100 || string.IsNullOrEmpty(text) ? false : true;
+        public static bool IsValid(string text)
+        {
+            return !string.IsNullOrEmpty(text) && text.Length <= 100;
+        }
 
     }
 }

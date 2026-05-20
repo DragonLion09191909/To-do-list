@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using static To_do_list.To_Do_List;
+using static To_do_list.TodoList;
 
 namespace To_do_list
 {
@@ -15,89 +15,96 @@ namespace To_do_list
                     Console.Clear();
                     Console.WriteLine("Print your doing there!");
                     op.AddInList(Console.ReadLine());
-                    PrintList(op);
+                    PrintList(op.List);
+                    
                     break;
                 case ConsoleKey.C:
                     Console.Clear();
-                    Console.WriteLine("Choose index you want to change status");
+                    Console.WriteLine("Choose index you want to change status:");
                     if (int.TryParse(Console.ReadLine(), out int inputOfIndex))
                     {
-                        Console.WriteLine("Choose status for this doing");
+                        Console.WriteLine("Choose status for this doing (Active, Done, Cancelled):");
                         op.ChangeStatus(inputOfIndex, Console.ReadLine());
-                        PrintList(op);
-
-
+                        PrintList(op.List);
+                        
                     }
-
                     else throw new Exception("This index doesn't exist!");
-
                     break;
                 case ConsoleKey.D:
                     Console.Clear();
-                    Console.WriteLine("Choose index you want to delete");
+                    Console.WriteLine("Choose index you want to delete:");
                     if (int.TryParse(Console.ReadLine(), out int index))
                     {
                         op.DeleteInList(index);
-                        PrintList(op);
+                        PrintList(op.List);
+                        
                     }
                     else throw new Exception("This index doesn't exist!");
-
-
                     break;
                 default:
                     Console.Clear();
-                    Console.WriteLine("Unknow method!");
+                    Console.WriteLine("Unknown method!");
                     Console.ReadLine();
                     Console.Clear();
                     break;
             }
         }
-        private static void PrintList(Operator op)
+
+        public static void PrintList(List<TodoList> list)
         {
             Console.Clear();
             Console.WriteLine("Your current plans:");
-
-            foreach (var item in op.list)
+            if (list != null && list.Count > 0)
             {
-                int IndexOfDoing = op.list.IndexOf(item) + 1;
-
-                switch (item.State)
+                foreach (var item in list)
                 {
-                    case To_Do_List.Status.Active:
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        break;
-                    case To_Do_List.Status.Cancelled:
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        break;
-                    case To_Do_List.Status.Done:
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        break;
-                }
+                    int indexOfDoing = list.IndexOf(item) + 1;
 
-                Console.WriteLine($"- {IndexOfDoing}:{item.Doing}");
+                    switch (item.State)
+                    {
+                        case TodoList.Status.Active:
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            break;
+                        case TodoList.Status.Cancelled:
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            break;
+                        case TodoList.Status.Done:
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            break;
+                    }
+
+                    Console.WriteLine($"- {indexOfDoing}:{item.Title}");
+                }
+                Console.ResetColor();
+                Console.WriteLine();
             }
-            Console.ResetColor();
-            Console.WriteLine();
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("Empty");
+                Console.ResetColor();
+            }
         }
-        public  static void PrintChoices()
+
+        public static void PrintChoices()
         {
             Console.WriteLine("You can complete operations:");
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("\t[C]-Change status of doing: green-Done, yellow-Active,red-Cancelled");
+            Console.WriteLine("\t[C]-Change status of doing: green-Done, yellow-Active, red-Cancelled");
             Console.WriteLine("\t[D]-Delete doing");
             Console.WriteLine("\t[P]-Print doings");
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ResetColor();
         }
+
         public static void PrintError(Exception ex)
         {
             Console.Clear();
-            ConsoleColor oldColor = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine($"Error: {ex.Message}");
-            Console.ForegroundColor = oldColor;
+            Console.ResetColor();
             Console.ReadLine();
             Console.Clear();
         }
-       
     }
+
 }

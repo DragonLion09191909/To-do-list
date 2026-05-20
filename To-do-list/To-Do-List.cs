@@ -6,20 +6,21 @@ using System.Text;
 
 namespace To_do_list
 {
-    internal class To_Do_List
+    internal class TodoList
     {
-     
-       
-       public Status State { get ;   set; }
-       
-       public string Doing { get ;  private set; }
-       public enum Status { Done, Cancelled, Active }
 
-       public To_Do_List(string doing)
+
+        public Status State { get; set; }
+        public string Title { get; set; } 
+        public enum Status { Done, Cancelled, Active }
+
+       
+        public TodoList() { }
+
+        public TodoList(string title)
         {
-            Doing = doing;
+            Title = title;
             State = Status.Active;
-            
         }
     }
 }
